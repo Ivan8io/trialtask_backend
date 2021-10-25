@@ -18,7 +18,7 @@ class CreateResidentsTable extends Migration
             $table->id();                       // ID (номер лицевого счета) дачника
             $table->string('fio');              // ФИО дачника
             $table->float('area');              // Площадь огорода дачника
-            $table->timestampTz('start_date');  // Дата подключения дачника к водокачке
+            $table->dateTimeTz('start_date');  // Дата подключения дачника к водокачке
         });
     }
 

@@ -3,10 +3,8 @@
 namespace App\Providers;
 
 use App\Http\Resources\TariffResource;
-use DB;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
-use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,12 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        TariffResource::withoutWrapping();
+//        TariffResource::withoutWrapping();
 
-        DB::listen(function($sql) {
-            Log::info($sql->sql);
-            Log::info($sql->bindings);
-            Log::info($sql->time);
-        });
+//        DB::listen(function($sql) {
+//            Log::info($sql->sql);
+//            Log::info($sql->bindings);
+//            Log::info($sql->time);
+//        });
     }
 }

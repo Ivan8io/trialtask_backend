@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveResidentRequest;
+use App\Http\Resources\ResidentCollection;
 use App\Models\Resident;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -13,11 +14,11 @@ class ResidentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response|Resident[]
+     * @return Response|ResidentCollection
      */
     public function index()
     {
-        return Resident::all();
+        return new ResidentCollection(Resident::paginate(5));
     }
 
     /**
@@ -51,7 +52,7 @@ class ResidentsController extends Controller
         try {
             $resident->update($validatedData);
         } catch (QueryException $e) {
-            return response()->json(['errors' => ['price' => ['Слишком большая площадь']]], 422);
+            return response()->json(['errors' => ['area' => ['Слишком большая площадь']]], 422);
         }
 
         return $resident;
