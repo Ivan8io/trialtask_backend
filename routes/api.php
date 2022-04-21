@@ -16,14 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-//    Route::get('/user', function (Request $request) {
-//        return $request->user();
-//    });
 
     Route::apiResource('tariffs', 'TariffsController')->except(['show', 'destroy']);
     Route::apiResource('residents', 'ResidentsController')->except(['show']);
-
-//    Route::get('/bills', 'BillsController@index');
 
     Route::post('/pump-meters', 'PumpMetersController@store');
     Route::get('/pump-meters/get-last-month-record', 'PumpMetersController@getLastMonthRecord');
