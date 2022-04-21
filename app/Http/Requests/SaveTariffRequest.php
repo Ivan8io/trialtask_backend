@@ -27,7 +27,7 @@ class SaveTariffRequest extends FormRequest
         $currentMonthEnd = Carbon::now()->endOfMonth()->endOfDay()->toDateTimeString();
 
         return [
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:1|max:999999.99',
             'begin_date' => 'required|date|after:' . $currentMonthEnd,
         ];
     }

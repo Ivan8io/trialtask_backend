@@ -26,7 +26,7 @@ class SaveResidentRequest extends FormRequest
     {
         return [
             'fio' => ['required','string', new FullName],
-            'area' => 'required|numeric',
+            'area' => 'required|numeric|min:1|max:999999.99',
             'start_date' => 'required|date',
         ];
     }

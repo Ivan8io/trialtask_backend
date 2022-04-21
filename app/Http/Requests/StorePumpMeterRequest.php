@@ -24,7 +24,7 @@ class StorePumpMeterRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount_volume' => 'required|numeric',
+            'amount_volume' => 'required|numeric|min:1|max:999999.99',
         ];
     }
 }
