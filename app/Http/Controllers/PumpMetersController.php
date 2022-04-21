@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePumpMeterRequest;
 use App\Models\PumpMeter;
 use App\Services\PumpMeterService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 
 class PumpMetersController extends Controller
@@ -21,11 +21,7 @@ class PumpMetersController extends Controller
     {
         $validatedData = $request->validated();
 
-        try {
-            return $service->create($validatedData);
-        } catch (QueryException $e) {
-            return response()->json(['errors' => ['amount_volume' => ['Показания уже переданы']]], 422);
-        }
+        return $service->create($validatedData);
     }
 
     /**

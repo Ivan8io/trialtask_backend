@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveResidentRequest;
 use App\Http\Resources\ResidentCollection;
 use App\Models\Resident;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -31,11 +31,7 @@ class ResidentsController extends Controller
     {
         $validatedData = $request->validated();
 
-        try {
-            return Resident::create($validatedData);
-        } catch (QueryException $e) {
-            return response()->json(['errors' => ['area' => ['Слишком большая площадь.']]], 422);
-        }
+        return Resident::create($validatedData);
     }
 
     /**
@@ -49,11 +45,7 @@ class ResidentsController extends Controller
     {
         $validatedData = $request->validated();
 
-        try {
-            $resident->update($validatedData);
-        } catch (QueryException $e) {
-            return response()->json(['errors' => ['area' => ['Слишком большая площадь']]], 422);
-        }
+        $resident->update($validatedData);
 
         return $resident;
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -7,7 +8,6 @@ use App\Http\Requests\SaveTariffRequest;
 use App\Http\Resources\TariffResource;
 use App\Models\Tariff;
 use App\Services\TariffService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 
 class TariffsController extends Controller
@@ -32,35 +32,27 @@ class TariffsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  SaveTariffRequest  $request
+     * @param SaveTariffRequest $request
      * @return JsonResponse|Tariff
      */
     public function store(SaveTariffRequest $request, TariffService $service)
     {
         $validatedData = $request->validated();
 
-        try {
-            return $service->create($validatedData);
-        } catch (QueryException $e) {
-            return response()->json(['errors' => ['price' => ['Слишком высокая стоимость']]], 422);
-        }
+        return $service->create($validatedData);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Tariff  $tariff
+     * @param Tariff $tariff
      * @return TariffResource|JsonResponse
      */
     public function update(SaveTariffRequest $request, Tariff $tariff)
     {
         $validatedData = $request->validated();
 
-        try {
-            $tariff->update($validatedData);
-        } catch (QueryException $e) {
-            return response()->json(['errors' => ['price' => ['Слишком высокая стоимость']]], 422);
-        }
+        $tariff->update($validatedData);
 
         return new TariffResource($tariff);
     }
